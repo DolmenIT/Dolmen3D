@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src", // Ceci indique où le fichier de sortie sera sauvegardé
+    "outDir": "./build/dolmen3d", // Ceci indique où le fichier de sortie sera sauvegardé
+    "target": "ES2017",    // Cible ECMAScript, vous pouvez choisir une autre version selon vos besoins
+    "module": "ESNext",  // Utilisation du module système pour la compilation
+    "removeComments": true,
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "declaration": false,
+    "sourceMap": false,   
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    //"lib": ["es2015", "dom"]
+  },
+  "include": [ "**/*.ts" ],
+  "exclude": [ "node_modules" ]
+}

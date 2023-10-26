@@ -1,0 +1,5 @@
+{
+    "out": "./docs", // Répertoire de sortie pour la documentation générée
+    "entryPoints": ["./src/dolmenjs.ts"], // Répertoire source de votre framework TypeScript
+    "includeVersion": true // Optional: Include TypeScript version in the documentation
+  }
