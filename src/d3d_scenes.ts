@@ -23,7 +23,7 @@ export class d3d_scenes {
   
     // Méthode pour obtenir un objet par son nom dans la fenêtre virtuelle actuelle.
     getScene = () => {
-        d3d.debug.log("d3d_scenes.getScene");
+        // d3d.debug.log("d3d_scenes.getScene");
         // Vérification si la fenêtre virtuelle actuelle est définie.
         if (this.currentScene) {
             return this.scenes[this.currentScene] || null;
@@ -61,7 +61,7 @@ export class d3d_scenes {
 
     // Méthode pour ajouter un objet à une fenêtre virtuelle avec un nom donné.
     addObjects = (p_params: any) => {
-        d3d.debug.log("d3d_scenes.addObjects:" + JSON.stringify(p_params));
+        // d3d.debug.log("d3d_scenes.addObjects:" + JSON.stringify(p_params));
 
         for (let name in p_params) {
             this.addObject(name, p_params[name]);
@@ -70,7 +70,7 @@ export class d3d_scenes {
 
     // Méthode pour obtenir un objet par son nom dans la fenêtre virtuelle actuelle.
     getObject = (objectName: string) => {
-        d3d.debug.log("d3d_scenes.getObject:" + objectName);
+        // d3d.debug.log("d3d_scenes.getObject:" + objectName);
         // Vérification si la fenêtre virtuelle actuelle est définie.
         if (this.currentScene) {
             return this.scenesWithObjects[this.currentScene][objectName] || null;

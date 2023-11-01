@@ -1,5 +1,3 @@
-d3d.debug.disable();
-
 d3d.scenes.setScene("example_1");
 
 d3d.materials.creates({
@@ -31,7 +29,7 @@ d3d.scenes.addObjects({
         center: [7.5, 0, 0], size: [ 1, 1, 1 ], material: "basicFushia"
     }),
     "objCamera": d3d.object.camera({
-        position: [3.75, 3, 4], target: [3.75, 0, 0], range: [0, 100]
+        position: [3.75, 0, 4], target: [3.75, 0, 0], range: [0, 100]
     }),
     "objAmbientLight": d3d.object.ambientlight({
         power: 0.25, color: d3d.color.hex("#ffffff")

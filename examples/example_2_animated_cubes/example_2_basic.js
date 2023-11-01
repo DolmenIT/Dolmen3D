@@ -29,31 +29,31 @@ d3d.animate.rotate("objCubeFushia", {
 // // translate
 d3d.animate.translate("objCubeRed", {
     speed: [0, 1, 0],
-    range: [0, [-7, 3], 0],
+    range: [0, [-3, 3], 0],
     start: [0, 0, 0]
 });
 d3d.animate.translate("objCubeYellow", {
     speed: [0, 1, 0],
-    range: [0, [-7, 3], 0],
+    range: [0, [-3, 3], 0],
     start: [0, 1, 0]
 });
 d3d.animate.translate("objCubeGreen", {
     speed: [0, 1, 0],
-    range: [0, [-7, 3], 0],
+    range: [0, [-3, 3], 0],
     start: [0, 2, 0]
 });
 d3d.animate.translate("objCubeTeal", {
     speed: [0, 1, 0],
-    range: [0, [-7, 3], 0],
+    range: [0, [-3, 3], 0],
     start: [0, 3, 0]
 });
 d3d.animate.translate("objCubeBlue", {
     speed: [0, 1, 0],
-    range: [0, [-7, 3], 0],
+    range: [0, [-3, 3], 0],
     start: [0, 4, 0]
 });
 d3d.animate.translate("objCubeFushia", {
     speed: [0, 1, 0],
-    range: [0, [-7, 3], 0],
+    range: [0, [-3, 3], 0],
     start: [0, 5, 0]
 });

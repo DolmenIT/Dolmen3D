@@ -14,7 +14,6 @@ export class d3d_scenes {
             this.currentScene = sceneName;
         };
         this.getScene = () => {
-            d3d.debug.log("d3d_scenes.getScene");
             if (this.currentScene) {
                 return this.scenes[this.currentScene] || null;
             }
@@ -43,13 +42,11 @@ export class d3d_scenes {
             }
         };
         this.addObjects = (p_params) => {
-            d3d.debug.log("d3d_scenes.addObjects:" + JSON.stringify(p_params));
             for (let name in p_params) {
                 this.addObject(name, p_params[name]);
             }
         };
         this.getObject = (objectName) => {
-            d3d.debug.log("d3d_scenes.getObject:" + objectName);
             if (this.currentScene) {
                 return this.scenesWithObjects[this.currentScene][objectName] || null;
             }

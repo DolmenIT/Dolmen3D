@@ -2,6 +2,7 @@ import { d3d } from './dolmen3d.js';
 export class d3d_loader {
     constructor() {
         this.loadScene = (scene_path, p_params) => {
+            d3d.render.ready = false;
             try {
                 d3d.native.loadJS(scene_path, p_params)
                     .then(response => {
@@ -10,6 +11,7 @@ export class d3d_loader {
                         d3d.params.setAll(response.p_params);
                     }
                     eval(response.data);
+                    d3d.render.ready = true;
                 });
             }
             catch (error) {

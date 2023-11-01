@@ -1,5 +1,3 @@
-d3d.debug.disable();
-
 d3d.scenes.setScene("example_1");
 
 d3d.materials.create("basicRed", { phong: { color: 0xff0000 } });

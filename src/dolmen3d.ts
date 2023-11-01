@@ -10,6 +10,8 @@ import { d3d_geometry } from './d3d_geometry.js';
 import { d3d_animate } from './d3d_animate.js';
 import { d3d_color } from './d3d_color.js';
 import { d3d_math } from './d3d_math.js';
+import { d3d_webxr } from './d3d_webxr.js';
+import { d3d_monitor } from './d3d_monitor.js';
 
 class dolmen3d {
   debug: d3d_debug | undefined;
@@ -24,6 +26,8 @@ class dolmen3d {
   animate: d3d_animate | undefined;
   color: d3d_color | undefined;
   math: d3d_math | undefined;
+  webxr: d3d_webxr | undefined;
+  monitor: d3d_monitor | undefined;
   
   callback: any | undefined;
 
@@ -35,6 +39,8 @@ class dolmen3d {
     console.log("dolmen3d.init");
 
     this.debug = new d3d_debug();
+    this.monitor = new d3d_monitor();
+
     this.properties = new d3d_properties();
     this.render = new d3d_render();
     this.loader = new d3d_loader();
@@ -46,13 +52,14 @@ class dolmen3d {
     this.animate = new d3d_animate();
     this.color = new d3d_color();
     this.math = new d3d_math();
+    this.webxr = new d3d_webxr();
   }
 
   start = () => {
     console.log("dolmen3d.start");
 
     d3d.render.init();
-    d3d.render.render();
+    d3d.render.start();
   }
 
   onLoad = (callback_function: any) => {
