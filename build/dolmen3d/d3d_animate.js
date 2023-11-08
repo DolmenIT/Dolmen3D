@@ -9,6 +9,9 @@ export class d3d_animate {
         this.apply = () => {
             return new Promise((resolve, reject) => {
                 try {
+                    if (d3d.render.modeName == 'webxr') {
+                        d3d.debug.log("d3d_animate.apply");
+                    }
                     const currentTimestamp = performance.now();
                     const elapsedMilliseconds = currentTimestamp - this.lastApplyTimestamp;
                     this.lastApplyTimestamp = currentTimestamp;

@@ -2,38 +2,55 @@ import { d3d } from './dolmen3d.js';
 
 export class d3d_monitor {
     enabled: boolean = true;
-    private d3dMonitorDiv: HTMLDivElement;
-    private d3dMemoryDiv: HTMLDivElement;
+    private d3d_monitor_div: HTMLDivElement;
+    private d3d_monitor_memory: HTMLDivElement;
+    private d3d_monitor_target: HTMLDivElement;
+    private d3d_monitor_fps: HTMLDivElement;
+    private d3d_monitor_speed: HTMLDivElement;
 
     constructor() {
         console.log("d3d_debug.constructor");
 
-        this.d3dMonitorDiv = document.createElement('div');
-        this.d3dMonitorDiv.className = 'd3d_monitor';
-        this.d3dMonitorDiv.style.position = 'absolute';
-        this.d3dMonitorDiv.style.top = '1vw';  // Optionnel : Définir la position depuis le haut
-        this.d3dMonitorDiv.style.left = '89vw';  // Optionnel : Définir la position depuis la gauche
-        this.d3dMonitorDiv.style.width = '10vw';  // Optionnel : Définir la position depuis la gauche
-        this.d3dMonitorDiv.style.height = '10vw';  // Optionnel : Définir la position depuis la gauche
-        this.d3dMonitorDiv.style.color = 'white';  // Texte blanc
-        this.d3dMonitorDiv.style.backgroundColor = 'hsla(210,75%,25%,0.5)';  // Fond rouge foncé
-        this.d3dMonitorDiv.style.overflow = 'hidden';
-        this.d3dMonitorDiv.style.padding = '0.5vw';
-        this.d3dMonitorDiv.style.fontFamily = 'arial';
-        document.body.appendChild(this.d3dMonitorDiv);
+        this.d3d_monitor_div = document.createElement('div');
+        this.d3d_monitor_div.className = 'd3d_monitor';
+        this.d3d_monitor_div.style.position = 'absolute';
+        this.d3d_monitor_div.style.top = '1vw';  // Optionnel : Définir la position depuis le haut
+        this.d3d_monitor_div.style.left = '89vw';  // Optionnel : Définir la position depuis la gauche
+        this.d3d_monitor_div.style.width = '10vw';  // Optionnel : Définir la position depuis la gauche
+        this.d3d_monitor_div.style.height = '10vw';  // Optionnel : Définir la position depuis la gauche
+        this.d3d_monitor_div.style.color = 'white';  // Texte blanc
+        this.d3d_monitor_div.style.backgroundColor = 'hsla(210,75%,25%,0.5)';  // Fond rouge foncé
+        this.d3d_monitor_div.style.overflow = 'hidden';
+        this.d3d_monitor_div.style.padding = '0.5vw';
+        this.d3d_monitor_div.style.fontFamily = 'arial';
+        this.d3d_monitor_div.style.fontSize = '0.7vw';
+        this.d3d_monitor_div.style.lineHeight = '0.9vw';
+        this.d3d_monitor_div.style.borderRadius = '0.5vw';
+        this.d3d_monitor_div.style.border = 'solid 0 transparent';
+        this.d3d_monitor_div.style.boxShadow = 'inset 0 0 0.05vw 0.05vw rgba(32,128,224,0.5), 0 0 0.05vw 0.05vw rgba(32,128,224,0.5), inset 0 0 5vw 0 rgba(32,128,224,0.25)';
+        document.body.appendChild(this.d3d_monitor_div);
 
-        this.d3dMemoryDiv = document.createElement('div');
-        this.d3dMemoryDiv.id = 'd3d_monitor_memory';
-        this.d3dMemoryDiv.style.fontSize = '0.7vw';
-        this.d3dMemoryDiv.style.lineHeight = '0.9vw';
-        this.d3dMonitorDiv.appendChild(this.d3dMemoryDiv);
+        this.d3d_monitor_memory = document.createElement('div');
+        this.d3d_monitor_memory.id = 'd3d_monitor_memory';
+        this.d3d_monitor_div.appendChild(this.d3d_monitor_memory);
+
+        this.d3d_monitor_target = document.createElement('div');
+        this.d3d_monitor_target.id = 'd3d_monitor_target';
+        this.d3d_monitor_div.appendChild(this.d3d_monitor_target);
+
+        this.d3d_monitor_fps = document.createElement('div');
+        this.d3d_monitor_fps.id = 'd3d_monitor_fps';
+        this.d3d_monitor_div.appendChild(this.d3d_monitor_fps);
+
+        this.d3d_monitor_speed = document.createElement('div');
+        this.d3d_monitor_speed.id = 'd3d_monitor_speed';
+        this.d3d_monitor_div.appendChild(this.d3d_monitor_speed);
 
         setTimeout(this.update, 1000);
     }
 
     update = () => {
         const bytes = window.performance.memory.usedJSHeapSize;
-    
         let memoryUsage;
         if (bytes < 1048576) {  // Si moins de 1 MB (1024 * 1024 bytes)
             memoryUsage = (bytes / 1024).toFixed(2) + " KB";
@@ -42,8 +59,11 @@ export class d3d_monitor {
         } else {
             memoryUsage = (bytes / 1073741824).toFixed(2) + " GB";
         }
-    
-        this.d3dMemoryDiv.innerText = "Memory usage : " + memoryUsage;
+        this.d3d_monitor_memory.innerText = "Memory usage : " + memoryUsage;
+
+        this.d3d_monitor_target.innerText = "Target FPS : " + d3d.render.max_fps;
+        this.d3d_monitor_fps.innerText = "Current FPS : " + d3d.render.current_fps;
+        this.d3d_monitor_speed.innerText = "Frame speed : " + d3d.render.ms_fps;
         
         setTimeout(d3d.monitor.update, 1000);
     }

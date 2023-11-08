@@ -1,14 +1,14 @@
 import { d3d } from './dolmen3d.js';
 export class d3d_webxr {
     constructor() {
+        this.viewer = { position: { x: 0, y: 0, z: 0 }, orientation: { x: 0, y: 0, z: 0 } };
         this.sessionInit = null;
         this.currentSession = null;
         this.XRButton = null;
         this.mode = null;
-        this.renderer = null;
-        this.loop = false;
+        this.referenceSpace = null;
         this.enable = (sessionInit = {}) => {
-            d3d.debug.log("d3d_webxr:enable");
+            d3d.debug.log("d3d_webxr.enable");
             d3d.webxr.sessionInit = sessionInit;
             d3d.webxr.XRButton = document.createElement('button');
             d3d.webxr.enableButton();
@@ -43,7 +43,7 @@ export class d3d_webxr {
             }
         };
         this.enableButton = () => {
-            d3d.debug.log("d3d_webxr:enableButton");
+            d3d.debug.log("d3d_webxr.enableButton");
             d3d.webxr.XRButton.id = 'XRButton';
             d3d.webxr.XRButton.style.display = 'button';
             d3d.webxr.XRButton.style.cursor = 'pointer';
@@ -64,46 +64,86 @@ export class d3d_webxr {
             d3d.webxr.XRButton.textContent = 'START XR';
             d3d.webxr.XRButton = document.body.appendChild(d3d.webxr.XRButton);
             d3d.webxr.XRButton.addEventListener("click", () => {
-                d3d.debug.log("d3d_webxr:click");
-                d3d.debug.urlsend = true;
-                d3d.debug.log("d3d_webxr:test");
-                d3d.debug.urlsend = true;
-                d3d.debug.log("d3d_webxr:onClick");
+                d3d.webxr.onClick();
             });
         };
         this.onClick = () => {
             d3d.debug.urlsend = true;
-            d3d.debug.log("d3d_webxr:test");
-            d3d.debug.urlsend = true;
-            d3d.debug.log("d3d_webxr:onClick");
+            d3d.debug.log("d3d_webxr.onClick");
+            if (d3d.webxr.currentSession === null) {
+                d3d.render.renderer.xr.enabled = true;
+                navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor', 'bounded-floor'] }).then(d3d.webxr.onSessionStarted);
+            }
+            else {
+                d3d.webxr.currentSession.end();
+            }
+        };
+        this.onSessionStarted = (session) => {
+            d3d.debug.log("d3d_webxr.onSessionStarted");
+            session.addEventListener('end', d3d.webxr.onSessionEnded);
+            d3d.webxr.currentSession = session;
+            d3d.render.renderer.xr.setSession(d3d.webxr.currentSession);
+            d3d.webxr.start();
+        };
+        this.onSessionEnded = () => {
+            d3d.debug.log("d3d_webxr.onSessionEnded");
+            d3d.webxr.currentSession.removeEventListener('end', d3d.webxr.onSessionEnded);
+            d3d.webxr.currentSession = null;
+            d3d.debug.urlsend = false;
         };
         this.showXRNotSupported = () => {
-            d3d.debug.log("d3d_webxr:showXRNotSupported");
+            d3d.debug.log("d3d_webxr.showXRNotSupported");
             d3d.debug.log('XR NOT SUPPORTED');
         };
         this.showXRNotAllowed = (exception) => {
-            d3d.debug.log("d3d_webxr:showXRNotAllowed");
+            d3d.debug.log("d3d_webxr.showXRNotAllowed");
             d3d.debug.log('Exception when trying to call xr.isSessionSupported', exception);
         };
         this.start = () => {
-            d3d.debug.log("d3d_webxr.render");
-            d3d.render.stop();
-            d3d.webxr.loop = true;
+            d3d.debug.log("d3d_webxr.start");
             d3d.webxr.render();
         };
         this.stop = () => {
-            d3d.webxr.loop = false;
+            d3d.webgl.start();
+        };
+        this.updateViewer = (xrFrame) => {
+            d3d.debug.log("d3d_webxr.updateViewer");
+            try {
+                d3d.debug.log("d3d_webxr.updateViewer:1");
+                const viewerPose = xrFrame.getViewerPose(d3d.webxr.referenceSpace);
+                d3d.debug.log("d3d_webxr.updateViewer:2");
+                if (viewerPose) {
+                    d3d.debug.log("d3d_webxr.updateViewer:3");
+                    viewerPose.views.forEach(view => {
+                        d3d.debug.log("d3d_webxr.updateViewer:4");
+                        const position = view.transform.position;
+                        const orientation = view.transform.orientation;
+                        d3d.debug.log("d3d_webxr.updateViewer:" + position.x + ":" + position.y + ":" + position.z);
+                        d3d.webxr.viewer.position = { x: position.x, y: position.y, z: position.z };
+                        d3d.webxr.viewer.orientation = { x: orientation.x, y: orientation.y, z: orientation.z };
+                    });
+                    d3d.debug.log("d3d_webxr.updateViewer:5");
+                }
+            }
+            catch (error) {
+                d3d.debug.log("d3d_webxr.updateViewer:" + error.toString());
+            }
+            d3d.debug.log("d3d_webxr.updateViewer:6");
         };
         this.render = () => {
             d3d.debug.log("d3d_webxr.render");
-            if (d3d.webxr.loop) {
-                requestAnimationFrame(d3d.webxr.render);
-                d3d.animate.apply();
-                if (d3d.scenes.currentScene) {
-                    d3d.webxr.renderer.render(d3d.scenes.getScene('example_1'), d3d.scenes.getObject('objCamera'));
-                }
+            d3d.render.mode('webxr');
+            if (!d3d.render.started) {
+                d3d.render.loop = false;
+                d3d.render.renderer.setAnimationLoop(d3d.render.render);
             }
         };
         d3d.debug.log("d3d_webxr.constructor");
+    }
+    getPosition() {
+        return d3d.webxr.viewer.position;
+    }
+    getOrientation() {
+        return d3d.webxr.viewer.orientation;
     }
 }
