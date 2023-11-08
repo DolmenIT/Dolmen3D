@@ -19,15 +19,17 @@ const colorNames = [
     "basicFushia"
 ];
 
+let pi_factor = Math.PI / 10;
+
 
 // demo cube with face colored
-for (let z = -15; z <= 15; z++) {
-    for (let x = -15; x <= 15; x++) {
+for (let z = -10; z <= 10; z++) {
+    for (let x = -10; x <= 10; x++) {
         let objName = "objCube_" + x + "_" + z
 
         let randomColorName = colorNames[Math.floor(Math.random() * colorNames.length)];
-        let start_y = Math.random();
-        let speed_y = Math.random();
+        let start_y = Math.cos(pi_factor * x) + Math.sin(pi_factor * z);
+        // let speed_y = 1;
 
         d3d.scenes.addObject(objName,
             d3d.geometry.cube({
@@ -37,18 +39,18 @@ for (let z = -15; z <= 15; z++) {
             })
         );
 
-        d3d.animate.translate(objName, {
-            speed: [0, speed_y, 0],
-            range: [0, [-1, 1], 0],
-            start: [0, 0, 0]
-        });
+        // d3d.animate.translate(objName, {
+        //     speed: [0, speed_y, 0],
+        //     range: [0, [-2, 2], 0],
+        //     start: [0, 0, 0]
+        // });
     }
 }
 
 // camera place 
 d3d.scenes.addObject("objCamera",
     d3d.object.camera({
-        position: [0, 3, -18], // near top left
+        position: [-15, 15, -15], // near top left
         target: [0, 0, 0],
         range: [0, 100]
     })
