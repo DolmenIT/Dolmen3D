@@ -1,0 +1,13 @@
+* {
+	background: linear-gradient(22.5deg, hsla(270,100%,70%,0.25), hsla(90,100%,70%,0.25));
+}
+a {
+    display: block;
+    line-height: 6vh;
+    font-size: 2vh;
+    text-align: center;
+    text-decoration: none;
+    font-family: "Roboto Mono", monospace;
+    color: hsl(200, 95%, 50%);
+    background: linear-gradient(22.5deg, hsl(0,0%,80%), hsl(0,0%,95%));
+}

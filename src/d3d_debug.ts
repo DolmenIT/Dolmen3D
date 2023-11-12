@@ -46,6 +46,25 @@ export class d3d_debug {
         }
     }
 
+    error = (text: string) => {
+        if (this.enabled) {
+            if (this.urlsend) {
+                const url = `/debug=${encodeURIComponent(text)}`;
+
+                const response = fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                });
+            }
+            else {
+                this.d3dDebugDiv.innerHTML = d3d.debug.getCurrentTimestamp() + ' : ' + text + '<br />' + String(this.d3dDebugDiv.innerHTML).substring(0, 1000);
+            }
+        }
+    }
+
+
     getCurrentTimestamp = () => {
         var now = new Date();
         var hours = now.getHours().toString().padStart(2, '0');

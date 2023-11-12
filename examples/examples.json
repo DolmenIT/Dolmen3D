@@ -1,0 +1,17 @@
+{
+    "Exeample 1": {
+        "name": "Colored cubes",
+        "link": "example_1_colored_cubes/example_1.html",
+        "image": "images/example1.jpg"
+    },
+    "Exeample 2": {
+        "name": "Animated cubes",
+        "link": "example_2_animated_cubes/example_2.html",
+        "image": "images/example2.jpg"
+    },
+    "Exeample 3": {
+        "name": "Field of cubes",
+        "link": "example_3_field_of_cubes/example_3.html",
+        "image": "images/example3.jpg"
+    }
+}

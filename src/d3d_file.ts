@@ -1,13 +1,13 @@
 import { d3d } from './dolmen3d.js';
 
-export class d3d_native {
+export class d3d_file {
     constructor() {
-        d3d.debug.log("d3d_native.constructor");
+        d3d.debug.log("d3d_file.constructor");
     }
 
     // Fonction pour charger le fichier JSON à partir de l'URL
     fetchJSON = (filePath: string) => {
-        d3d.debug.log("d3d_native.fetchJSON:"+filePath);
+        d3d.debug.log("d3d_file.fetchJSON:"+filePath);
         return new Promise((resolve, reject) => {
             if (typeof window.nativeInterface === "undefined") {
                 // Utilisation de fetch pour charger le fichier JSON à partir de l'URL
