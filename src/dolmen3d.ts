@@ -76,10 +76,12 @@ class dolmen3d {
     console.log("dolmen3d.tryCallback");
 
     if (typeof d3d.callback == 'function') {
+      console.log("dolmen3d.tryCallback.callback");
       d3d.callback();
     }
     else {
-      setTimeout(d3d.tryCallback(), 10000);
+      console.log("dolmen3d.tryCallback.settimeout");
+      setTimeout(() => { d3d.tryCallback() }, 100);
     }
   }
 }

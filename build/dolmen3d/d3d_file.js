@@ -1,8 +1,8 @@
 import { d3d } from './dolmen3d.js';
-export class d3d_native {
+export class d3d_file {
     constructor() {
         this.fetchJSON = (filePath) => {
-            d3d.debug.log("d3d_native.fetchJSON:" + filePath);
+            d3d.debug.log("d3d_file.fetchJSON:" + filePath);
             return new Promise((resolve, reject) => {
                 if (typeof window.nativeInterface === "undefined") {
                     fetch(filePath)
@@ -62,6 +62,6 @@ export class d3d_native {
                 }
             });
         };
-        d3d.debug.log("d3d_native.constructor");
+        d3d.debug.log("d3d_file.constructor");
     }
 }

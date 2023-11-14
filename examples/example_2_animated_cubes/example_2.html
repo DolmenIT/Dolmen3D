@@ -9,9 +9,12 @@
     </style>
   </head>
   <body>
-    <ul>
-      <li><a href="example_2_basic.html">Example 2 - Animated Cube - Basic</a></li>
-      <li><a href="example_2_mini.html">Example 2 - Animated Cube - Mini</a></li>
-    </ul>
   </body>
+  <script src="../vendors/threejs/three.js"></script>
+  <script src="../vendors/dolmen3d/dolmen3d.js"></script>
+  <script>
+	d3d.onLoad(() => {
+		d3d.loader.loadScene('example_2.js');
+	});
+  </script>
 </html>

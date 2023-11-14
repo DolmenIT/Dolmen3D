@@ -14,36 +14,43 @@ export class d3d_monitor {
         this.d3d_monitor_div = document.createElement('div');
         this.d3d_monitor_div.className = 'd3d_monitor';
         this.d3d_monitor_div.style.position = 'absolute';
-        this.d3d_monitor_div.style.top = '1vw';  // Optionnel : Définir la position depuis le haut
-        this.d3d_monitor_div.style.left = '89vw';  // Optionnel : Définir la position depuis la gauche
+        this.d3d_monitor_div.style.top = '0';  // Optionnel : Définir la position depuis le haut
+        this.d3d_monitor_div.style.left = '90vw';  // Optionnel : Définir la position depuis la gauche
         this.d3d_monitor_div.style.width = '10vw';  // Optionnel : Définir la position depuis la gauche
-        this.d3d_monitor_div.style.height = '10vw';  // Optionnel : Définir la position depuis la gauche
+        this.d3d_monitor_div.style.height = '5vw';  // Optionnel : Définir la position depuis la gauche
         this.d3d_monitor_div.style.color = 'white';  // Texte blanc
-        this.d3d_monitor_div.style.backgroundColor = 'hsla(210,75%,25%,0.5)';  // Fond rouge foncé
+        this.d3d_monitor_div.style.backgroundColor = 'hsla(210,75%,25%,0.25)';  // Fond rouge foncé
         this.d3d_monitor_div.style.overflow = 'hidden';
         this.d3d_monitor_div.style.padding = '0.5vw';
         this.d3d_monitor_div.style.fontFamily = 'arial';
         this.d3d_monitor_div.style.fontSize = '0.7vw';
         this.d3d_monitor_div.style.lineHeight = '0.9vw';
-        this.d3d_monitor_div.style.borderRadius = '0.5vw';
+        this.d3d_monitor_div.style.borderRadius = '0 0 0 5vw';
         this.d3d_monitor_div.style.border = 'solid 0 transparent';
-        this.d3d_monitor_div.style.boxShadow = 'inset 0 0 0.05vw 0.05vw rgba(32,128,224,0.5), 0 0 0.05vw 0.05vw rgba(32,128,224,0.5), inset 0 0 5vw 0 rgba(32,128,224,0.25)';
+        this.d3d_monitor_div.style.boxShadow = 'inset 0 0 5vw 5vw hsla(210,75%,50%,0.5), 0 0 0.5vw 0.5vw hsla(0,0%,0%,0.25), inset 0 0 1vw 0 hsla(210,75%,50%,0.5)';
+        this.d3d_monitor_div.style.textShadow = '0.05vw 0.05vw 0.1vw black';
+        this.d3d_monitor_div.style.fontWeight = '600';
+
         document.body.appendChild(this.d3d_monitor_div);
 
         this.d3d_monitor_memory = document.createElement('div');
         this.d3d_monitor_memory.id = 'd3d_monitor_memory';
+        this.d3d_monitor_memory.style.textAlign = 'right';
         this.d3d_monitor_div.appendChild(this.d3d_monitor_memory);
 
         this.d3d_monitor_target = document.createElement('div');
         this.d3d_monitor_target.id = 'd3d_monitor_target';
+        this.d3d_monitor_target.style.textAlign = 'right';
         this.d3d_monitor_div.appendChild(this.d3d_monitor_target);
 
         this.d3d_monitor_fps = document.createElement('div');
         this.d3d_monitor_fps.id = 'd3d_monitor_fps';
+        this.d3d_monitor_fps.style.textAlign = 'right';
         this.d3d_monitor_div.appendChild(this.d3d_monitor_fps);
 
         this.d3d_monitor_speed = document.createElement('div');
         this.d3d_monitor_speed.id = 'd3d_monitor_speed';
+        this.d3d_monitor_speed.style.textAlign = 'right';
         this.d3d_monitor_div.appendChild(this.d3d_monitor_speed);
 
         setTimeout(this.update, 1000);
