@@ -111,7 +111,7 @@ function init() {
                     const mesh = new THREE.Mesh(geometry, meshMaterial);
                     mesh.position.set(-(sizeX / 2) + i, k, -(sizeZ / 2) + j);
                     mesh.rotation.set(-Math.PI / 2, 0, 0);
-                    mesh.scale.set(1, 1, 8);
+                    mesh.scale.set(0.1, 0.1, 0.1);
 
                     mesh.castShadow = true;
                     mesh.receiveShadow = true;
