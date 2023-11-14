@@ -23,10 +23,10 @@ function hslToHex(h, s, l) {
 }
 
 
-const sizeX = 20; // Default 20
-const sizeZ = 20; // Default 20
+const sizeX = 25; // Default 20
+const sizeZ = 25; // Default 20
 const height = 10; // Default 10
-const zoom = 1;
+const zoom = 0.9;
 const colors = [
     hslToHex(190, 20, 30), // RED
     hslToHex(80, 60, 40), // GREEN
