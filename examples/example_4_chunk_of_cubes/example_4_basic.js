@@ -2,13 +2,24 @@ d3d.render.maxFPS(60);
 
 d3d.scenes.setScene("example_4");
 
-d3d.materials.create("bedrock", { phong: { color: 0x3E3E3E } });
-d3d.materials.create("limestone", { phong: { color: 0xD9D9D9 } });
-d3d.materials.create("earth", { phong: { color: 0x8B4513 } });
-d3d.materials.create("grass", { phong: { color: 0x7CFC00 } });
-d3d.materials.create("swamp", { phong: { color: 0x2F4F4F } });
-d3d.materials.create("podzol", { phong: { color: 0x967860 } });
-d3d.materials.create("water", { phong: { color: 0x1E90FF } });
+function hslToHex(h, s, l) {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+        const k = (n + h / 30) % 12;
+        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+        return Math.round(255 * color);
+    };
+    return (f(0) << 16) + (f(8) << 8) + f(4);
+}
+
+d3d.materials.create("bedrock", { phong: { color: hslToHex(190,30,45) } });
+d3d.materials.create("limestone", { phong: { color: hslToHex(45,20,90) } });
+d3d.materials.create("earth", { phong: { color: hslToHex(25,30,45) } });
+d3d.materials.create("grass", { phong: { color: hslToHex(80,60,60) } });
+d3d.materials.create("swamp", { phong: { color: hslToHex(100,50,30) } });
+d3d.materials.create("podzol", { phong: { color: hslToHex(120,70,45) } });
+d3d.materials.create("water", { phong: { color: hslToHex(210,50,60) } });
 
 const colorNames = [
     "bedrock",

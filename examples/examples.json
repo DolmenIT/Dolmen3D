@@ -13,5 +13,10 @@
         "name": "Field of cubes",
         "link": "example_3_field_of_cubes/example_3.html",
         "image": "images/example3.jpg"
+    },
+    "Exeample 4": {
+        "name": "Chunk of cubes",
+        "link": "example_4_chunk_of_cubes/example_4.html",
+        "image": "images/example4.jpg"
     }
 }
